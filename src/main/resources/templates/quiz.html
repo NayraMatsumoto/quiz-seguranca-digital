@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/app.css">
+    <title>Quiz - Segurança Corporativa</title>
+</head>
+<body class="app-shell">
+    <div class="container py-5 min-vh-100 d-flex align-items-center">
+        <div class="row justify-content-center w-100">
+            <div class="col-12 col-xl-9">
+                <div class="card glass-card rounded-5 border-0 overflow-hidden">
+                    <div class="card-body p-4 p-md-5">
+                        <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+                            <div>
+                                <div class="text-uppercase text-soft small fw-semibold mb-1">Quiz em andamento</div>
+                                <h1 class="h3 fw-bold mb-0">Pergunta <span th:text="${indiceAtual}"></span> de <span th:text="${total}"></span></h1>
+                            </div>
+                            <span class="hero-badge">Marque apenas uma alternativa</span>
+                        </div>
+
+                        <div class="progress mb-4" style="height: 10px; background: rgba(255,255,255,.12);">
+                            <div class="progress-bar"
+                                 role="progressbar"
+                                 th:style="|width: ${indiceAtual * 100 / total}%; background: linear-gradient(135deg, #71ddff, #7c9cff);|"
+                                 th:attr="aria-valuenow=${indiceAtual}, aria-valuemin=0, aria-valuemax=${total}"></div>
+                        </div>
+
+                        <h2 class="display-6 fw-semibold title-xl mb-4" th:text="${questao.enunciado}"></h2>
+
+                        <form th:action="@{/quiz/responder}" th:object="${respostaQuestaoDto}" method="post">
+                            <div class="list-group mb-4">
+                                <label class="list-group-item p-3 p-md-4">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <input class="form-check-input m-0" type="radio" th:field="*{resposta}" value="A">
+                                        <div>
+                                            <div class="fw-bold">(A) - <span th:text="${questao.opcaoA}"></span></div>
+                                        </div>
+                                    </div>
+                                </label>
+                                <label class="list-group-item p-3 p-md-4">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <input class="form-check-input m-0" type="radio" th:field="*{resposta}" value="B">
+                                        <div>
+                                            <div class="fw-bold">(B) - <span th:text="${questao.opcaoB}"></span></div>
+                                        </div>
+                                    </div>
+                                </label>
+                                <label class="list-group-item p-3 p-md-4">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <input class="form-check-input m-0" type="radio" th:field="*{resposta}" value="C">
+                                        <div>
+                                            <div class="fw-bold">(C) - <span th:text="${questao.opcaoC}"></span></div>
+                                        </div>
+                                    </div>
+                                </label>
+                                <label class="list-group-item p-3 p-md-4 mb-0">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <input class="form-check-input m-0" type="radio" th:field="*{resposta}" value="D">
+                                        <div>
+                                            <div class="fw-bold">(D) - <span th:text="${questao.opcaoD}"></span></div>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <div class="text-danger small mb-3" th:if="${#fields.hasErrors('resposta')}" th:errors="*{resposta}"></div>
+
+                            <button type="submit" class="btn btn-gradient btn-lg w-100">Próxima pergunta</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
