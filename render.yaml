@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: quiz-seguranca-digital-web
+    env: docker
+    plan: free
+    repo: https://github.com/NayraMatsumoto/quiz-seguranca-digital
+    branch: main
+    buildCommand: ./mvnw -DskipTests package
+    startCommand: java -Dserver.port=$PORT -jar target/quiz-seguranca-digital-1.0.0.jar
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+    healthCheckPath: /actuator/health
+
+databases:
+  - name: quiz-db
+    engine: postgres
+    plan: starter
+    region: oregon
