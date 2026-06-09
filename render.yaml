@@ -5,8 +5,8 @@ services:
     plan: free
     repo: https://github.com/NayraMatsumoto/quiz-seguranca-digital
     branch: main
-    buildCommand: ./mvnw -DskipTests package
-    startCommand: java -Dserver.port=$PORT -jar target/quiz-seguranca-digital-1.0.0.jar
+    buildCommand: mvn -DskipTests package
+    startCommand: sh -lc 'java -Dserver.port=$PORT -jar target/*.jar'
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
