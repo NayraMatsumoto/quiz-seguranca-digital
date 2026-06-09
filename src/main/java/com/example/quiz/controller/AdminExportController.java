@@ -66,7 +66,7 @@ public class AdminExportController {
     // Usage: POST /admin/export/clear?token=YOUR_TOKEN
     // Token must match the environment variable ADMIN_CLEAR_TOKEN.
     @org.springframework.web.bind.annotation.PostMapping("/clear")
-    public void clearAlunos(javax.servlet.http.HttpServletResponse response,
+    public void clearAlunos(jakarta.servlet.http.HttpServletResponse response,
                             @org.springframework.web.bind.annotation.RequestParam(name = "token", required = true) String token) throws IOException {
         String expected = System.getenv("ADMIN_CLEAR_TOKEN");
         if (expected == null || !expected.equals(token)) {
