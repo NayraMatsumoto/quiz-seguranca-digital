@@ -13,4 +13,4 @@ WORKDIR /app
 ENV PORT=8080
 COPY --from=build /app/target/quiz-seguranca-digital-1.0.0.jar app.jar
 EXPOSE 8080
-CMD ["sh", "-c", "java -jar app.jar"]
+CMD ["sh", "-c", "java -Dserver.port=$PORT -jar app.jar"]
