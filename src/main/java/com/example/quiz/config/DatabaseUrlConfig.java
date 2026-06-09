@@ -9,7 +9,7 @@ import javax.sql.DataSource;
 import java.net.URI;
 
 @Configuration
-@Profile("prod")
+@Profile("!prod")
 public class DatabaseUrlConfig {
 
     @Bean
